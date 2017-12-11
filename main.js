@@ -23,6 +23,7 @@ $(document).ready(function($) {
                     $(".random-container").removeClass("form-hidden");
                     $(".random-number").text(randomNumber);
                     $(".random-fact").text(response);
+                    $gears.removeClass("gears-shown");
                 } else {
                     setTimeout(function() {
                         $(".random-container").removeClass("form-hidden");
