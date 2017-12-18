@@ -15,9 +15,10 @@ $(document).ready(function($) {
     function getFact() {
         var randomNumber = Math.floor(Math.random() * 100 + 1);
         $.ajax({
-            url: "http://numbersapi.com/" + randomNumber,
+            url: "https://cors-anywhere.herokuapp.com/http://numbersapi.com/" + randomNumber,
             type: "GET",
             success: function(response) {
+                console.log("Response code: ", xhr.status);
                 if (!clicked) {
                     $(".random-container").removeClass("load-hidden");
                     $(".random-container").removeClass("form-hidden");
