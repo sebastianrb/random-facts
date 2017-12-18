@@ -17,21 +17,26 @@ $(document).ready(function($) {
         $.ajax({
             url: "https://cors-anywhere.herokuapp.com/http://numbersapi.com/" + randomNumber,
             type: "GET",
-            success: function(response) {
+            success: function(response, textStatus, xhr) {
                 console.log("Response code: ", xhr.status);
-                if (!clicked) {
-                    $(".random-container").removeClass("load-hidden");
-                    $(".random-container").removeClass("form-hidden");
-                    $(".random-number").text(randomNumber);
-                    $(".random-fact").text(response);
-                    $gears.removeClass("gears-shown");
-                } else {
-                    setTimeout(function() {
+                if(xhr.status === 200) {
+                    if (!clicked) {
+                        $(".random-container").removeClass("load-hidden");
                         $(".random-container").removeClass("form-hidden");
                         $(".random-number").text(randomNumber);
                         $(".random-fact").text(response);
                         $gears.removeClass("gears-shown");
-                    }, 800);
+                    } else {
+                        setTimeout(function() {
+                            $(".random-container").removeClass("form-hidden");
+                            $(".random-number").text(randomNumber);
+                            $(".random-fact").text(response);
+                            $gears.removeClass("gears-shown");
+                        }, 800);
+                    }
+                } else {
+                    $(".random-number").text("?");
+                    $(".random-fact").text("Sorry, we are unable to retrieve a random fact at this time. Please try again.");
                 }
             }
         })
